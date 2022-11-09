@@ -156,7 +156,7 @@ public void Init()
 
         [... Completez ...]
         ```
-    - Créez les méthodes pour récupérer le Browser, le PlayerOne, le PlayerTwo et le Website de votre appsettings.
+- Créez les méthodes pour récupérer le Browser, le PlayerOne, le PlayerTwo et le Website de votre appsettings.
 - Vous pouvez maintenant développer votre test de lecture des settings.
 - (Nous reviendrons plus tard sur ce fichier de tests pour réaliser le tests de lecture de settings depuis notre futur ObjectRepository.Config contenant notre configuration)
 
