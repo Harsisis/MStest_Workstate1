@@ -31,7 +31,7 @@ Guided_Workshop.md
 
 ## Lecture du fichier de configuration (appsettings.json)
 - Créez un fichier appsettings.json, le format doit être json, voici un exemple :
-```
+```csharp
 {
   "GameSettings": {
     "Browser": "Firefox",
@@ -44,7 +44,7 @@ Guided_Workshop.md
 - Créez un dossier ConfigTests dans Tests
 - Créez une classe SettingTests, passez la en public, vous allez attribuer [TestClass] sur la classe. Il se peut que vous deviez faire cet import ```using Microsoft.VisualStudio.TestTools.UnitTesting;```
 - Ajoutez y une méthode Init en [TestInitialize] pour initialiser le test avec ce code
-```
+```csharp
 private GameSettings settings;
 
 [TestInitialize]
@@ -59,7 +59,7 @@ public void Init()
 }
 ```
 - Ajoutez également un test pour chaque élément du fichier de configuration GetBrowserFromConfig, GetPlayerOneFromConfig,...
-```
+```csharp
         [TestMethod]
         public void GetBrowserFromConfig()
         {
@@ -86,7 +86,7 @@ public void Init()
 ```
 - Créez une classe ConfigReaderTests à laquelle vous allez attribuer [TestClass]
   - Le test à réaliser en [TestMethod] est GetSettingsKeysFromConfigReader
-  ```
+  ```csharp
   [TestMethod]
   public void GetSettingsKeysFromConfigReader()
   {
@@ -103,9 +103,9 @@ public void Init()
     - Microsoft.Extensions.Configuration.Binder
     - Microsoft.Extensions.Configuration.EnvironmentVariables
     - Microsoft.Extensions.Configuration.Json
-- Ajoutez un élément de type Interface nommé IConfig dans le dossier Interfaces, ce dernier propose des signatures pour récupérer chaque élément du fichier appsettings (Exemple public ```BrowserType GetBrowser();```)
+- Ajoutez un élément de type Interface nommé IConfig dans le dossier Interfaces, ce dernier propose des signatures pour récupérer chaque élément du fichier appsettings (Exemple public ```csharp BrowserType GetBrowser();```)
 - Ajouter une enum BrowserType dans le dossier Settings
-```
+```csharp
     public enum BrowserType
     {
         Chrome,
@@ -114,7 +114,7 @@ public void Init()
     }
 ```
 - Ajouter une classe NoSuitableDriverFound dans le dossier CustomExceptions
-```
+```csharp
     public class NoSuitableDriverFound : Exception
     {
         public NoSuitableDriverFound(string message) : base(message) { }
@@ -122,7 +122,7 @@ public void Init()
 ```
 - Ajoutez une classe ConfigReader dans le dossier Configuration
     - Copiez le constructeur proposé et modifiez le chemin d'accès à votre JsonFile (attention, normalement ça ne devrait être noté que appsettings.json, mais j'ai eu quelques soucis de mon côté).
-    ```
+    ```csharp
         private GameSettings settings;
 
         public ConfigReader()
@@ -167,7 +167,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
   - Firefox avec FirefoxDriver()
   - InternetExporer avec InternetExplorerDriver()
 - Les méthodes de tests ressembleront à ça (x3)
-```
+```csharp
         [TestMethod]
         public void OpenChromeAndGoToHomePage()
         {
@@ -190,7 +190,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
 
 ## Mise en place de notre base et démarrage de l'assembly avec un ObjectRepostory valorisé
 - Créez une classe ObjectRepository (Dossier BaseClasses) avec deux propriétés static : IConfig Config et IWebDriver Driver (avec un { get; set; } classique)
-```
+```csharp
     public class ObjectRepository
     {
         public static IConfig Config { get; set; }
@@ -198,7 +198,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
     }
 ```
 - Créez ensuite une classe BaseClass (Dossier BaseClasses), avec l'attribut [TestClass]. Cette classe doit contenir les méthodes static pour récupérer les différents Driver (GetChromeDriver, GetFirefoxDriver,...). Ainsi qu'une méthode InitWebDriver(TestContext tc) attibuée en [AssemblyInitialize] permettant d'initialiser votre ObjectRepository.Config et votre ObjectRepository.Driver. Ceci doit lire votre fichier de config et démarrer le bon Driver (Vous pouvez faire une enum comme dans l'exemple, mais ce n'est pas obligatoire)
-```
+```csharp
     [TestClass]
     public class BaseClass
     {
@@ -273,7 +273,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
 - Le premier test devrait déjà fonctionner
 - Pour le second, il faut mettre en place un NavigationHelper, qui nous servira pour nous faciliter la tâche quant à l'utilisation du ObjectRepository.Driver. Ce NavigationHelper doit contenir une méthode static void NavigateToUrl(string url) appelant ObjectRepository.Driver.Navigate().GoToUrl(url).
 - Vous pouvez également faire une méthode NavigateToHomePage() qui utilise la même ligne de code que précédemment sauf que vous ciblez directement l'url du appsettings.json en paramètre avec ObjectRepository.Config.GetWebsite()
-```
+```csharp
     public class NavigationHelper
     {
         public static void NavigateToUrl(string url)
@@ -288,7 +288,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
     }
 ```
 - Pour le troisième, vous pouvez utiliser ObjectRepository.Driver.Title pour afficher le titre de la page.
-```
+```csharp
     [TestClass]
     public class PageNavigationTests
     {
@@ -320,7 +320,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
     }
 ```
 - Pour le dernier test, vous allez devoir créer un PageHelper vous permettant de retourner le titre via une méthode static GetTitle()
-```
+```csharp
     public class PageHelper
     {
         public static string GetPageTitle()
@@ -339,7 +339,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
 ### Accès à un élément
 - Créez un dossier FindElementTest dans le dossier Tests
 - Ajoutez une classe GenericHelper dans le dossier ComponentHelper
-```
+```csharp
   public class GenericHelper
     {
         public static bool IsElementPresentOnce(By locator)
@@ -380,7 +380,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
   - GetElementFromGenericHelper() : Qui va implémenter l'appel avec un GenericHelper utilisant ce qui a été fait précédemment
   - IsElementPresentOnce() : Qui va vérifier qu'un élément n'est présent qu'une fois FindElements().Count == 1
   - IsElementPresentOnceFromHelper(): Qui va utiliser GenericHelper pour réaliser l'opération précédente
-```
+```csharp
     [TestClass]
     public class FindElementTests
     {
@@ -462,7 +462,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
 
 ## Tips :
 - Si vous avez des soucis de navigation lors de vos tests, vous pouvez utiliser cet initialiseur de tests pour chacun de vos fichier tests nécessitant de démarrer sur la page d'accueil :
-```
+```csharp
   [TestInitialize]
   public void Init()
   {
@@ -516,7 +516,7 @@ Premièrement, créez un dossier de Tests NavigatorTests, ajoutez y une classe N
 - A noter que certaines Steps nécessite des Assert pour faire des vérifications
 - Avant de pouvoir lancer vos tests, il va falloir mettre en place un petit tricks afin d'initialiser notre projet principal dans nos tests. Ce trick consiste à utiliser un Hook SpecFlow pour initaliser et cleanup notre environnement de tests.
 - Créez une nouvelle classe dans le dossier Hook (SpecFlow) comme l'exemple ci-dessous :
-```
+```csharp
 [Binding]
     public class InitScenarioHook
     {
