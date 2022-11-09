@@ -1,14 +1,4 @@
-Don Gogo
-#8500
-🏍️VROOM
 
-Cédric BRASSEUR — Aujourd’hui à 09:59
-https://github.com/formation-cbrasseur/CI_CD_SnakeGame
-GitHub
-GitHub - formation-cbrasseur/CI_CD_SnakeGame: A game made in PHP / ...
-A game made in PHP / HTML / CSS used as an sample of code for CI_CD courses - GitHub - formation-cbrasseur/CI_CD_SnakeGame: A game made in PHP / HTML / CSS used as an sample of code for CI_CD courses
-Cédric BRASSEUR — Aujourd’hui à 10:27
-Voici le workshop guidé (format .md, ouvrez le sur VSCode avec l'aperçu si le format vous semble difficile à lire)
 # Workshop ATDD / BDD (Fil rouge)
 
 # Partie 1 : ATDD sur le jeu du serpent
