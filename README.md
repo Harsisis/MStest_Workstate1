@@ -103,7 +103,7 @@ public void Init()
     - Microsoft.Extensions.Configuration.Binder
     - Microsoft.Extensions.Configuration.EnvironmentVariables
     - Microsoft.Extensions.Configuration.Json
-- Ajoutez un élément de type Interface nommé IConfig dans le dossier Interfaces, ce dernier propose des signatures pour récupérer chaque élément du fichier appsettings (Exemple public ```csharp BrowserType GetBrowser();```)
+- Ajoutez un élément de type Interface nommé IConfig dans le dossier Interfaces, ce dernier propose des signatures pour récupérer chaque élément du fichier appsettings (Exemple public ```BrowserType GetBrowser();```)
 - Ajouter une enum BrowserType dans le dossier Settings
 ```csharp
     public enum BrowserType
